@@ -1,0 +1,24 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+
+entity rcadder is
+	port (x0, x1, x2, x3, y0, y1, y2, y3, cin : in std_logic;
+			s0, s1, s2, s3, cout : out std_logic);
+end rcadder;
+
+architecture behavioural of rcadder is
+	component fullAdder
+		port (A, B, c : in std_logic;
+				sum, cout : out std_logic);
+	end component;
+	
+	signal c0, c1, c2, c3 : std_logic;
+
+	begin
+		fa0: fullAdder port map (x0, y0, cin, s0, c0);
+		fa1: fullAdder port map (x1, y1, cin, s1, c1);
+		fa2: fullAdder port map (x2, y2, cin, s2, c2);
+		fa3: fullAdder port map (x3, y3, cin, s3, c3);
+end behavioural;
+	
