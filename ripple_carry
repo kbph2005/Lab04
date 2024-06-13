@@ -1,0 +1,23 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity ripple_carry is 
+	port ( SW : in std_logic_vector (17 downto 0);
+			LEDR : in std_logic_vector(3 downto 0);
+			LEDG, HEX0 : out std_logic);
+end ripple_carry;
+
+architecture behavioural of ripple_carry is
+component fullAdder
+	port (A, B, C : in std_logic;
+			sum, cout : out std_logic);
+end component;
+
+signal c1, c2, c3 : std_logic;
+
+begin
+	U1: fullAdder port map (SW(3), sw(17), sw(4), HEX0, C1);
+	U2: fullAdder port map (SW(2), sw(16), c1, HEX0, C2);
+	U3: fullAdder port map (SW(1), sw(15), c2, HEX0, C3);
+	U4: fullAdder port map (SW(0), sw(14), c3, HEX0, LEDG);	
+end behavioural;	
